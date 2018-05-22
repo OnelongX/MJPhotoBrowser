@@ -109,7 +109,9 @@
         [[SDWebImageManager sharedManager] loadImageWithURL:_photo.url options:SDWebImageRetryFailed| SDWebImageLowPriority|SDWebImageHandleCookies progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
             ESStrong_(_photoLoadingView);
             if (receivedSize > kMinProgress) {
-                __photoLoadingView.progress = (float)receivedSize/expectedSize;
+                dispatch_async(dispatch_get_main_queue(), ^(){
+                    __photoLoadingView.progress = (float)receivedSize/expectedSize;
+                });
             }
         } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
             ESStrongSelf;
