@@ -198,14 +198,15 @@
 {
     if (index > 0) {
         MJPhoto *photo = _photos[index - 1];
-        [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:photo.url options:SDWebImageRetryFailed|SDWebImageLowPriority progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+        
+        [[SDWebImageManager sharedManager] loadImageWithURL:photo.url options:SDWebImageRetryFailed|SDWebImageLowPriority progress:nil completed:^(UIImage *image, NSData *imageData, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURLL) {
             
         }];
     }
     
     if (index < _photos.count - 1) {
         MJPhoto *photo = _photos[index + 1];
-        [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:photo.url options:SDWebImageRetryFailed|SDWebImageLowPriority progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+        [[SDWebImageManager sharedManager] loadImageWithURL:photo.url options:SDWebImageRetryFailed|SDWebImageLowPriority progress:nil completed:^(UIImage *image, NSData *imageData, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
             
         }];
     }
