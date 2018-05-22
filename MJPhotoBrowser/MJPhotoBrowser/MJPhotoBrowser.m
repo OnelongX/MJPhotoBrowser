@@ -29,7 +29,7 @@
 {
     self = [super init];
     if (self) {
-        _showSaveBtn = YES;
+        self.showSaveBtn = YES;
     }
     return self;
 }

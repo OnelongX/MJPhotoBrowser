@@ -14,7 +14,7 @@
 // 当前展示的图片索引
 @property (nonatomic, assign) NSUInteger currentPhotoIndex;
 // 保存按钮
-@property (nonatomic, assign) NSUInteger showSaveBtn;
+@property (nonatomic, assign) BOOL showSaveBtn;
 
 // 显示
 - (void)show;

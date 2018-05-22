@@ -190,9 +190,9 @@
     insetY = MAX(insetY, 0.0);
     if (ABS(_imageView.frame.origin.y - insetY) > 0.5) {
         [UIView animateWithDuration:0.2 animations:^{
-            CGRect imageViewFrame = _imageView.frame;
+            CGRect imageViewFrame = self->_imageView.frame;
             imageViewFrame = CGRectMake(imageViewFrame.origin.x, insetY, imageViewFrame.size.width, imageViewFrame.size.height);
-            _imageView.frame = imageViewFrame;
+            self->_imageView.frame = imageViewFrame;
         }];
     }
 }

@@ -56,8 +56,9 @@
 
 - (void)saveImage
 {
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        MJPhoto *photo = _photos[_currentPhotoIndex];
+        MJPhoto *photo =self->_photos[self->_currentPhotoIndex];
         UIImageWriteToSavedPhotosAlbum(photo.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
     });
 }
