@@ -1,8 +1,8 @@
 PODS:
-  - SDWebImage (3.7.2):
-    - SDWebImage/Core (= 3.7.2)
-  - SDWebImage/Core (3.7.2)
-  - SVProgressHUD (1.1)
+  - SDWebImage (4.3.3):
+    - SDWebImage/Core (= 4.3.3)
+  - SDWebImage/Core (4.3.3)
+  - SVProgressHUD (2.2.5)
   - YLGIFImage (0.11)
 
 DEPENDENCIES:
@@ -10,9 +10,17 @@ DEPENDENCIES:
   - SVProgressHUD
   - YLGIFImage
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - SDWebImage
+    - SVProgressHUD
+    - YLGIFImage
+
 SPEC CHECKSUMS:
-  SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
-  SVProgressHUD: 54de4d9ab38aa3f688da401f5766a5738084e7fb
+  SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   YLGIFImage: c0ae132fe80e5282b2762a97d14e23ba71a748ae
 
-COCOAPODS: 0.38.2
+PODFILE CHECKSUM: 2e9ba55547822cb902fde4e2b7d99ad0d9eb26b4
+
+COCOAPODS: 1.5.2
