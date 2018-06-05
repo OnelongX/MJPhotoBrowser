@@ -83,7 +83,7 @@
                 [self realSave];
             } else {  // 相册不可用
                 [SVProgressHUD showInfoWithStatus:@"保存失败"];
-                [SVProgressHUD dismissWithDelay:2.0f];
+                [SVProgressHUD dismissWithDelay:1.0f];
                 NSLog(@"相册不可用");
             }
         }
@@ -111,7 +111,7 @@
         [self.viewController presentViewController:alertController animated:YES completion:nil];
     }else{
         [SVProgressHUD showInfoWithStatus:@"开启后才能访问你的相册"];
-        [SVProgressHUD dismissWithDelay:2.0f];
+        [SVProgressHUD dismissWithDelay:1.0f];
     }
     
 }
@@ -122,9 +122,9 @@
 - (void)openJurisdiction
 {
     NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-    CGFloat version= [[UIDevice currentDevice].systemVersion floatValue];
+    //CGFloat version= [[UIDevice currentDevice].systemVersion floatValue];
     if ([[UIApplication sharedApplication] canOpenURL:url]) {
-        if (version > 10.0) {
+         if (@available(iOS 10.0, *)) {
             [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
         } else {
             [[UIApplication sharedApplication] openURL:url];
@@ -143,13 +143,13 @@
 {
     if (error) {
         [SVProgressHUD showInfoWithStatus:@"保存失败"];
-        [SVProgressHUD dismissWithDelay:2.0f];
+        [SVProgressHUD dismissWithDelay:1.0f];
     } else {
         MJPhoto *photo = _photos[_currentPhotoIndex];
         photo.save = YES;
         _saveImageBtn.enabled = NO;
         [SVProgressHUD showSuccessWithStatus:@"成功保存到相册"];
-        [SVProgressHUD dismissWithDelay:2.0f];
+        [SVProgressHUD dismissWithDelay:1.0f];
     }
 }
 
