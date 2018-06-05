@@ -8,6 +8,7 @@
 
 #import "MJPhotoToolbar.h"
 #import "MJPhoto.h"
+#import <Photos/PHPhotoLibrary.h>
 
 @interface MJPhotoToolbar()
 {
@@ -58,7 +59,99 @@
 
 - (void)saveImage
 {
+    if (@available(iOS 11.0, *)) {
+        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+            if (status == PHAuthorizationStatusNotDetermined || status == PHAuthorizationStatusAuthorized) {
+                //保存图片到相册
+                [self realSave];
+            } else {
+                //====没有权限====
+                [self showNoAlbumAuthalertControllerWithVC];
+            }
+        }];
+    } else {
+        //======判断 访问相册 权限是否开启=======
+        PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+        //有被授权访问的照片数据   用户已经明确否认了这一照片数据的应用程序访问
+        //家长控制,不允许访问 || 用户拒绝当前应用访问相册
+        if (status == PHAuthorizationStatusRestricted || status == PHAuthorizationStatusDenied) {
+            //====没有权限====
+            [self showNoAlbumAuthalertControllerWithVC];
+        } else {    //====有访问相册的权限=======
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {   //相册可用
+                //因为需要知道该操作的完成情况，即保存成功与否，所以此处需要一个回调方法image:didFinishSavingWithError:contextInfo:
+                [self realSave];
+            } else {  // 相册不可用
+                [SVProgressHUD showErrorWithStatus:@"保存失败"];
+                NSLog(@"相册不可用");
+            }
+        }
+    }
+}
+- (void)showNoAlbumAuthalertControllerWithVC
+{
+    NSString *title;
+    NSString *message;
+    title = @"开启相册权限";
+    message = @"开启后才能访问你的相册";
+    __weak typeof(self) weakSelf = self;
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+    }];
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"去开启" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        //===无权限 引导去开启===
+        if(weakSelf)
+            [weakSelf openJurisdiction];
+    }];
+    [alertController addAction:cancel];
+    [alertController addAction:ok];
+    [[self getCurrentVC] presentViewController:alertController animated:YES completion:nil];
+}
+
+-(UIViewController *)getCurrentVC {
+    UIViewController *result = nil;
     
+    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
+    if (window.windowLevel != UIWindowLevelNormal)
+    {
+        NSArray *windows = [[UIApplication sharedApplication] windows];
+        for(UIWindow * tmpWin in windows)
+        {
+            if (tmpWin.windowLevel == UIWindowLevelNormal)
+            {
+                window = tmpWin;
+                break;
+            }
+        }
+    }
+    
+    UIView *frontView = [[window subviews] objectAtIndex:0];
+    id nextResponder = [frontView nextResponder];
+    
+    if ([nextResponder isKindOfClass:[UIViewController class]])
+        result = nextResponder;
+    else
+        result = window.rootViewController;
+    
+    return result;
+}
+
+#pragma mark-------去设置界面开启权限----------
+- (void)openJurisdiction
+{
+    NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+    CGFloat version= [[UIDevice currentDevice].systemVersion floatValue];
+    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+        if (version > 10.0) {
+            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+        } else {
+            [[UIApplication sharedApplication] openURL:url];
+        }
+    }
+}
+
+-(void)realSave {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         MJPhoto *photo =self->_photos[self->_currentPhotoIndex];
         UIImageWriteToSavedPhotosAlbum(photo.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
