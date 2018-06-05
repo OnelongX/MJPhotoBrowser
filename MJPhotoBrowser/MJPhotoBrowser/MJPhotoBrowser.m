@@ -84,6 +84,7 @@
         if (!_reusablePhotoViews) {
             _reusablePhotoViews = [NSMutableSet set];
         }
+        self.toolbar.viewController = self.viewController;
         self.toolbar.photos = self.photos;
         
         

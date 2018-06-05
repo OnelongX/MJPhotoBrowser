@@ -106,36 +106,15 @@
     }];
     [alertController addAction:cancel];
     [alertController addAction:ok];
-    [[self getCurrentVC] presentViewController:alertController animated:YES completion:nil];
-}
-
--(UIViewController *)getCurrentVC {
-    UIViewController *result = nil;
-    
-    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
-    if (window.windowLevel != UIWindowLevelNormal)
-    {
-        NSArray *windows = [[UIApplication sharedApplication] windows];
-        for(UIWindow * tmpWin in windows)
-        {
-            if (tmpWin.windowLevel == UIWindowLevelNormal)
-            {
-                window = tmpWin;
-                break;
-            }
-        }
+    if(self.viewController){
+        [self.viewController presentViewController:alertController animated:YES completion:nil];
+    }else{
+        [SVProgressHUD showErrorWithStatus:@"开启后才能访问你的相册"];
     }
     
-    UIView *frontView = [[window subviews] objectAtIndex:0];
-    id nextResponder = [frontView nextResponder];
-    
-    if ([nextResponder isKindOfClass:[UIViewController class]])
-        result = nextResponder;
-    else
-        result = window.rootViewController;
-    
-    return result;
 }
+
+
 
 #pragma mark-------去设置界面开启权限----------
 - (void)openJurisdiction

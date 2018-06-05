@@ -15,7 +15,7 @@
 @property (nonatomic, assign) NSUInteger currentPhotoIndex;
 // 保存按钮
 @property (nonatomic, assign) BOOL showSaveBtn;
-
+@property (nonatomic, weak) UIViewController *viewController;
 // 显示
 - (void)show;
 
