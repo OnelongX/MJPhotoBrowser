@@ -82,7 +82,8 @@
                 //因为需要知道该操作的完成情况，即保存成功与否，所以此处需要一个回调方法image:didFinishSavingWithError:contextInfo:
                 [self realSave];
             } else {  // 相册不可用
-                [SVProgressHUD showErrorWithStatus:@"保存失败"];
+                [SVProgressHUD showInfoWithStatus:@"保存失败"];
+                [SVProgressHUD dismissWithDelay:2.0f];
                 NSLog(@"相册不可用");
             }
         }
@@ -109,7 +110,8 @@
     if(self.viewController){
         [self.viewController presentViewController:alertController animated:YES completion:nil];
     }else{
-        [SVProgressHUD showErrorWithStatus:@"开启后才能访问你的相册"];
+        [SVProgressHUD showInfoWithStatus:@"开启后才能访问你的相册"];
+        [SVProgressHUD dismissWithDelay:2.0f];
     }
     
 }
@@ -140,12 +142,14 @@
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
     if (error) {
-        [SVProgressHUD showErrorWithStatus:@"保存失败"];
+        [SVProgressHUD showInfoWithStatus:@"保存失败"];
+        [SVProgressHUD dismissWithDelay:2.0f];
     } else {
         MJPhoto *photo = _photos[_currentPhotoIndex];
         photo.save = YES;
         _saveImageBtn.enabled = NO;
         [SVProgressHUD showSuccessWithStatus:@"成功保存到相册"];
+        [SVProgressHUD dismissWithDelay:2.0f];
     }
 }
 
