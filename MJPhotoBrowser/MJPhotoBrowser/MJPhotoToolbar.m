@@ -164,15 +164,17 @@
 
 - (void)setCurrentPhotoIndex:(NSUInteger)currentPhotoIndex
 {
-    _currentPhotoIndex = currentPhotoIndex;
+    if(_photos.count >currentPhotoIndex){
+        _currentPhotoIndex = currentPhotoIndex;
+        // 更新页码
+        _indexLabel.text = [NSString stringWithFormat:@"%d / %d", (int)_currentPhotoIndex + 1, (int)_photos.count];
     
-    // 更新页码
-    _indexLabel.text = [NSString stringWithFormat:@"%d / %d", (int)_currentPhotoIndex + 1, (int)_photos.count];
-    
-    MJPhoto *photo = _photos[_currentPhotoIndex];
-    // 按钮
-    _saveImageBtn.enabled = photo.image != nil && !photo.save;
-    _saveImageBtn.hidden =!_showSaveBtn;
+        MJPhoto *photo = _photos[_currentPhotoIndex];
+        // 按钮
+        _saveImageBtn.enabled = photo.image != nil && !photo.save;
+        _saveImageBtn.hidden =!_showSaveBtn;
+    }
+   
 }
 
 @end
