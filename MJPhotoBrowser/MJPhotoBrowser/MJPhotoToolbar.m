@@ -47,7 +47,8 @@
     // 保存图片按钮
     CGFloat btnWidth = self.bounds.size.height;
     _saveImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    _saveImageBtn.frame = CGRectMake(20, 0, btnWidth, btnWidth);
+    
+    _saveImageBtn.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - btnWidth - 20, 0, btnWidth, btnWidth);
     _saveImageBtn.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     //静态库
     if([UIImage imageNamed:@"MJPhotoBrowser.bundle/save_icon.png"]) {
