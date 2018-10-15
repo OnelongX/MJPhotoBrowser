@@ -48,10 +48,10 @@
     CGFloat btnWidth = 24;//self.bounds.size.height;
     _saveImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    _saveImageBtn.frame = CGRectMake(200, 0, btnWidth, btnWidth);
-    _saveImageBtn.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    _saveImageBtn.frame = CGRectMake(0, 0, btnWidth, btnWidth);
+    _saveImageBtn.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin;
+   
     //静态库
-    
     if([UIImage imageNamed:@"MJPhotoBrowser.bundle/save_icon.png"]) {
         [_saveImageBtn setImage:[UIImage imageNamed:@"MJPhotoBrowser.bundle/save_icon.png"] forState:UIControlStateNormal];
         [_saveImageBtn setImage:[UIImage imageNamed:@"MJPhotoBrowser.bundle/save_icon_highlighted.png"] forState:UIControlStateHighlighted];
