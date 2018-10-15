@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSArray *photos;
 // 当前展示的图片索引
 @property (nonatomic, assign) NSUInteger currentPhotoIndex;
+@property (nonatomic, copy) NSString *title;
 // 保存按钮
 @property (nonatomic, assign) BOOL showSaveBtn;
 @property (nonatomic, weak) UIViewController *viewController;

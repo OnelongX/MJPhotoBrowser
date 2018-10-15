@@ -19,6 +19,7 @@
 @property (strong, nonatomic) UIScrollView *photoScrollView;
 @property (strong, nonatomic) NSMutableSet *visiblePhotoViews, *reusablePhotoViews;
 @property (strong, nonatomic) MJPhotoToolbar *toolbar;
+@property (strong, nonatomic) UILabel *titleView;
 @end
 
 @implementation MJPhotoBrowser
@@ -72,6 +73,24 @@
     return _toolbar;
 }
 
+- (UILabel *) titleView{
+     if (!_titleView) {
+         _titleView = [[UILabel alloc] init];
+         _titleView.font = [UIFont boldSystemFontOfSize:20];
+         CGFloat barHeight = 30;
+         _titleView.frame = CGRectMake(0, 100, self.view.frame.size.width, barHeight);
+         _titleView.backgroundColor = [UIColor clearColor];
+         _titleView.textColor = [UIColor whiteColor];
+         _titleView.textAlignment = NSTextAlignmentCenter;
+         _titleView.autoresizingMask = UIViewAutoresizingFlexibleHeight |
+                                       UIViewAutoresizingFlexibleWidth |
+                                       UIViewAutoresizingFlexibleTopMargin;
+     }
+    return _titleView;
+}
+
+
+
 - (void)show
 {
     [[UIApplication sharedApplication].keyWindow endEditing:YES];
@@ -96,6 +115,8 @@
         
         [self.view addSubview:self.photoScrollView];
         [self.view addSubview:self.toolbar];
+        if(self.title)
+            [self.view addSubview:self.titleView];
         [self updateTollbarState];
         [self showPhotos];
     }
@@ -247,6 +268,10 @@
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     // 移除工具条
     [self.toolbar removeFromSuperview];
+    //移除 titleView
+    if(self.titleView.superview)
+        [self.titleView removeFromSuperview];
+    
     
     [UIView animateWithDuration:0.3 animations:^{
         self.view.alpha = 0;
