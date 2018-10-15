@@ -49,7 +49,7 @@
     _saveImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     
     _saveImageBtn.frame = CGRectMake([UIScreen mainScreen].bounds.size.width  - 20, 0, btnWidth, btnWidth);
-    _saveImageBtn.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    //_saveImageBtn.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     //静态库
     if([UIImage imageNamed:@"MJPhotoBrowser.bundle/save_icon.png"]) {
         [_saveImageBtn setImage:[UIImage imageNamed:@"MJPhotoBrowser.bundle/save_icon.png"] forState:UIControlStateNormal];
