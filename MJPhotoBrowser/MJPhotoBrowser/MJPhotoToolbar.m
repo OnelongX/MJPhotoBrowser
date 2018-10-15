@@ -49,6 +49,7 @@
     _saveImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     
     _saveImageBtn.frame = CGRectMake(self.bounds.size.width - 20 - btnWidth, 0, btnWidth, btnWidth);
+    NSLog(@"------------%0.2f",self.bounds.size.width - 20 - btnWidth);
     _saveImageBtn.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin;
    
     //静态库
