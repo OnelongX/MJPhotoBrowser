@@ -48,8 +48,8 @@
     CGFloat btnWidth = self.bounds.size.height;
     _saveImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    _saveImageBtn.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - btnWidth - 20, 0, btnWidth, btnWidth);
-    _saveImageBtn.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    _saveImageBtn.frame = CGRectMake(btnWidth + 20, 0, btnWidth, btnWidth);
+    _saveImageBtn.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     //静态库
     if([UIImage imageNamed:@"MJPhotoBrowser.bundle/save_icon.png"]) {
         [_saveImageBtn setImage:[UIImage imageNamed:@"MJPhotoBrowser.bundle/save_icon.png"] forState:UIControlStateNormal];
