@@ -45,7 +45,7 @@
     }
     
     // 保存图片按钮
-    CGFloat btnWidth = 24;//self.bounds.size.height;
+    CGFloat btnWidth = self.bounds.size.height;
     _saveImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     
     _saveImageBtn.frame = CGRectMake(0, 0, btnWidth, btnWidth);
