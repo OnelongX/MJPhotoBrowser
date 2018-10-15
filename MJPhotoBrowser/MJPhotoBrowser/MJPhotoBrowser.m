@@ -115,8 +115,10 @@
         
         [self.view addSubview:self.photoScrollView];
         [self.view addSubview:self.toolbar];
-        if(self.title)
+        if(self.title){
             [self.view addSubview:self.titleView];
+            self.titleView.text = self.title;
+        }
         [self updateTollbarState];
         [self showPhotos];
     }
@@ -268,7 +270,7 @@
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     // 移除工具条
     [self.toolbar removeFromSuperview];
-    //移除 titleView
+    // 移除 titleView
     if(self.titleView.superview)
         [self.titleView removeFromSuperview];
     
