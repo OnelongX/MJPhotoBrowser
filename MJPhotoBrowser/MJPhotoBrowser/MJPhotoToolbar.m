@@ -45,12 +45,11 @@
     }
     
     // 保存图片按钮
-    CGFloat btnWidth = self.bounds.size.width;
+    CGFloat btnWidth = 24;
     _saveImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    _saveImageBtn.frame = CGRectMake(20, 0, btnWidth, btnWidth);
-    NSLog(@"-------1-----%0.2f",self.bounds.size.width - 20 - btnWidth);
-    _saveImageBtn.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin;
+    _saveImageBtn.frame = CGRectMake(self.bounds.size.width - 20 - btnWidth, 12, btnWidth, btnWidth);
+    _saveImageBtn.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin;
    
     //静态库
     if([UIImage imageNamed:@"MJPhotoBrowser.bundle/save_icon.png"]) {
